@@ -1,0 +1,507 @@
+# Author: Gabriel Colin
+#
+# MULTI-CASE PATIENT TEMPLATE
+# ---------------------------
+# HOW TO ADD A CASE
+#   1. Copy one of the case dictionaries below (CASE_ERYKAH or CASE_PLACEHOLDER).
+#   2. Rename it (e.g. CASE_JAMAL) and change the contents to your patient.
+#   3. Add its name to the ALL_CASES list right after the case dictionaries.
+#
+# That's it. The healthy-vitals reference (BASELINES) and everything under the
+# "ENGINE" line are shared by every case and should not need changes.
+#
+# Tips for editing a case:
+#   - Keep the commas and quotation marks. Each entry is one {...} block.
+#   - You can add or delete entries in any list (vitals, history, exam parts, diagnoses).
+#   - Use {doctor} in text to insert the player's name.
+#   - Use {complaint} in text to insert the chief complaint.
+#   - Dialogue lines are ("Speaker", "Line") pairs. Use None as the speaker for narration.
+#   - "title" appears on the case-select menu, so don't give away the diagnosis in it.
+#   - Players may pick ANY diagnosis from the list, and their choice is final. Exactly one option
+#     per case should have correct=True. Each option's "response" is shown when it is chosen, so for
+#     wrong answers explain why it doesn't fit, and for the correct answer include the treatment.
+#   - Each option's "description" appears in the Medical Dictionary, so write one for every option.
+
+
+# =====================================================================
+# CASE 1: Erykah
+# =====================================================================
+
+CASE_ERYKAH = {
+    "title": "A 12-year-old who had a seizure at school",
+    "patient_name": "Erykah",
+    "age_years": 12,
+    "chief_complaint": "seizure",
+
+    "intro": [
+        (None, "Your first patient of the day walks into the clinic."),
+        (None, "She is a 12-year-old named Erykah, and she is with her parents."),
+        ("Erykah's Father", "Help, Dr. {doctor}, my daughter just had a seizure in school!"),
+    ],
+
+    "vitals": [
+        {"label": "Blood Pressure",
+         "action": "You wrap the blood pressure cuff around the arm and slowly pump it up, paying close attention to the dial.",
+         "result": "The blood pressure you obtained was: 120/80"},
+        {"label": "Heart Rate",
+         "action": "You gently place two fingers on the wrist of the patient, counting each pulse until a minute has passed.",
+         "result": "The heart rate you obtained was: 85 bpm"},
+        {"label": "Respiration Rate/Breath Sounds",
+         "action": "You lean in close and, using your stethoscope, auscultate the rate and the quality.",
+         "result": "The respiration rate was 15 and lungs were equal and clear bilaterally."},
+        {"label": "Glucose",
+         "action": "Leaning in close, you gently grab one of the patient's fingers and prick it to get blood for the glucometer.",
+         "result": "You received a glucose of 110 mg/dL"},
+        {"label": "Skin Condition",
+         "action": "Placing the back of your hand against the patient's skin, you feel its condition.",
+         "result": "The skin was pink, warm, and sweaty."},
+    ],
+
+    "history": [
+        {"label": "Allergies",
+         "action": "You ask if there are any allergies you should know of.",
+         "responses": [("Erykah's Mom", "No, nothing that we know of.")]},
+        {"label": "Medications",
+         "action": "You ask if the patient has been taking any medications regularly.",
+         "responses": [("Erykah's Mom", "No, she's not on any medications."),
+                       ("Erykah's Dad", "Up until now my daughter has been the picture of health.")]},
+        {"label": "Pertinent Medical History",
+         "action": "You ask if the patient has had any medical history leading up to this visit.",
+         "responses": [("Erykah's Mom", "I mean, she had the flu last year, and while we still lived in Haiti she got pink eye, but other than that nothing.")]},
+        {"label": "Last Oral Intake",
+         "action": "Curious if this could be a poisoning or a bad reaction to something consumed, you ask what the last known oral intake was.",
+         "responses": [("Erykah", "I was at school eating sos pwa ak poul.")]},
+        {"label": "Events Leading Up",
+         "action": "You ask what the patient was doing immediately prior to the {complaint}.",
+         "responses": [("Erykah", "Nothing really, I was just eating my lunch and then when I woke up I saw a lot of people standing around me.")]},
+        {"label": "Onset",
+         "action": "You ask whether this was a sudden onset or if the patient could feel it coming.",
+         "responses": [("Erykah", "I didn't feel anything strange, it just kinda happened.")]},
+        {"label": "Provocation",
+         "action": "You ask if anything they do makes their condition better or worse.",
+         "responses": [("Erykah", "No, not really, my muscles are just really sore.")]},
+        {"label": "Quality",
+         "action": "You ask if there is any way they can describe how they feel, especially if there's any pain.",
+         "responses": [("Erykah", "My head just feels funny and my muscles just feel sore. Like after I play a soccer game.")]},
+        {"label": "Radiation",
+         "action": "You ask if there is any pain and if it spreads anywhere.",
+         "responses": [("Erykah", "All of my muscles are really sore and my head hurts.")]},
+        {"label": "Severity",
+         "action": "You ask how bad the pain is on a scale from 1 to 10.",
+         "responses": [("Erykah", "It's a 7.")]},
+        {"label": "Time",
+         "action": "You ask how long it has been since the {complaint} occurred.",
+         "responses": [("Erykah's Mom", "Her seizure happened about 30 minutes ago while she was at school.")]},
+        {"label": "Daily Life",
+         "action": "Curious what the patient's everyday life looks like, you ask for a synopsis of their day-to-day life.",
+         "responses": [
+             ("Erykah's Mom", "She's always been a shy girl, never really got along with her peers or even her siblings."),
+             ("Erykah's Mom", "In Haiti many people judged her because her features were so much lighter than mine or her father's."),
+             ("Erykah's Dad", "She has all this energy so we make her play sports to wear her down."),
+             ("Erykah's Dad", "Even though that only seems to worsen the smell."),
+             ("Erykah's Mom", "Honey!"),
+             ("Erykah's Dad", "What! You know it's true. Doc, ever since she's been a baby she's had this musty smell, and it only seems to get worse after meals."),
+             ("Erykah's Mom", "Either way... up until today she's been a healthy child. She struggles in school but works really hard. She still smiles, laughs, and plays like any other girl her age."),
+         ]},
+    ],
+
+    "exam": {
+        "Head": {
+            "overview": "You notice that the head is noticeably smaller than it should be for a kid her age.",
+            "parts": [
+                {"label": "Eyes/Pupils",
+                 "action": "Leaning in close, you carefully observe the eyes of the patient, using a penlight to assess their reactivity and color.",
+                 "result": "Her eyes are a light amber color with no yellowing around the whites of the eyes. Both eyes are equal and reactive to light."},
+                {"label": "Hair",
+                 "action": "You observe the texture and the quality of the patient's hair, looking for any signs of disease.",
+                 "result": "Erykah has curly hair that is a beautiful light brown, a color that matches her eyes."},
+            ],
+        },
+        "Body": {
+            "overview": "You notice that Erykah's body seems slightly underdeveloped for her age.",
+            "parts": [
+                {"label": "Torso",
+                 "action": "You examine the torso of the patient, looking for any sort of skin condition or malformity.",
+                 "result": "You notice that Erykah seems to be covered in flaky skin and small rashes."},
+                {"label": "Back",
+                 "action": "You check the patient's back, looking for anything that may indicate a skin condition or disease.",
+                 "result": "You notice that Erykah's back has a few bruises that seem to be new, within the last few hours."},
+            ],
+        },
+        "Legs": {
+            "overview": "You don't observe anything unique upon first glance.",
+            "parts": [
+                {"label": "Right Leg",
+                 "action": "You carefully examine the patient's right leg, scanning for any hidden signs.",
+                 "result": "You find evidence of bruising and some flaky skin surrounded by a rash."},
+                {"label": "Left Leg",
+                 "action": "You carefully examine the patient's left leg, scanning for any hidden signs.",
+                 "result": "You find evidence of bruising and some flaky skin surrounded by a rash."},
+            ],
+        },
+    },
+
+    "diagnosis": {
+        "prompt": "What do you believe the diagnosis is?",
+        "options": [
+            {"name": "Option 1",
+             "description": "TODO: replace with a real diagnosis and description.",
+             "correct": False,
+             "response": [(None, "That doesn't fully explain Erykah's findings.")]},
+            {"name": "Phenylketonuria (PKU)",
+             "description": "An inherited metabolic disorder in which the body cannot break down phenylalanine, an amino acid found in protein-containing foods. Buildup can cause seizures, intellectual disability, a small head size, lighter skin, hair, and eye color, eczema-like rashes, and a musty body odor. Managed with a diet low in phenylalanine and a medical formula.",
+             "correct": True,
+             "response": [
+                 (None, "You decide that the correct diagnosis for Erykah is Phenylketonuria, also known as PKU."),
+                 (None, "You prescribe her a diet low in phenylalanine and write a script for a nutritional supplement formula."),
+             ]},
+            {"name": "Option 3",
+             "description": "TODO: replace with a real diagnosis and description.",
+             "correct": False,
+             "response": [(None, "That doesn't fully explain Erykah's findings.")]},
+            {"name": "Option 4",
+             "description": "TODO: replace with a real diagnosis and description.",
+             "correct": False,
+             "response": [(None, "That doesn't fully explain Erykah's findings.")]},
+        ],
+    },
+}
+
+
+# =====================================================================
+# CASE 2: Placeholder case (an adult, to show a different age group)
+# Replace every [PLACEHOLDER: ...] with your own content.
+# =====================================================================
+
+CASE_PLACEHOLDER = {
+    "title": "[PLACEHOLDER: short, spoiler-free description of the patient]",
+    "patient_name": "[PLACEHOLDER: patient name]",
+    "age_years": 45,
+    "chief_complaint": "[PLACEHOLDER: chief complaint]",
+
+    "intro": [
+        (None, "[PLACEHOLDER: describe the patient arriving at the clinic.]"),
+        ("[PLACEHOLDER: speaker]", "[PLACEHOLDER: opening line] Dr. {doctor}, I came in because of my {complaint}."),
+    ],
+
+    "vitals": [
+        {"label": "Blood Pressure",
+         "action": "[PLACEHOLDER: what you do to take the blood pressure.]",
+         "result": "[PLACEHOLDER: blood pressure result, e.g. 130/85]"},
+        {"label": "Heart Rate",
+         "action": "[PLACEHOLDER: what you do to take the heart rate.]",
+         "result": "[PLACEHOLDER: heart rate result]"},
+        {"label": "Respiration Rate/Breath Sounds",
+         "action": "[PLACEHOLDER: what you do to assess breathing.]",
+         "result": "[PLACEHOLDER: respiration rate and breath sounds]"},
+        {"label": "Glucose",
+         "action": "[PLACEHOLDER: what you do to check glucose.]",
+         "result": "[PLACEHOLDER: glucose result]"},
+        {"label": "Skin Condition",
+         "action": "[PLACEHOLDER: what you do to assess the skin.]",
+         "result": "[PLACEHOLDER: skin color, temperature, and condition]"},
+    ],
+
+    "history": [
+        {"label": "Allergies",
+         "action": "You ask if there are any allergies you should know of.",
+         "responses": [("[PLACEHOLDER: speaker]", "[PLACEHOLDER: answer about allergies]")]},
+        {"label": "Medications",
+         "action": "You ask if the patient has been taking any medications regularly.",
+         "responses": [("[PLACEHOLDER: speaker]", "[PLACEHOLDER: answer about medications]")]},
+        {"label": "Events Leading Up",
+         "action": "You ask what the patient was doing immediately prior to the {complaint}.",
+         "responses": [("[PLACEHOLDER: speaker]", "[PLACEHOLDER: answer about what happened beforehand]")]},
+        {"label": "Time",
+         "action": "You ask how long it has been since the {complaint} began.",
+         "responses": [("[PLACEHOLDER: speaker]", "[PLACEHOLDER: answer about timing]"),
+                       ("[PLACEHOLDER: speaker]", "[PLACEHOLDER: a second line, if you want one]")]},
+        # Add more history entries here by copying one of the blocks above.
+    ],
+
+    "exam": {
+        "Head": {
+            "overview": "[PLACEHOLDER: what you notice at first glance, or None]",
+            "parts": [
+                {"label": "Eyes/Pupils",
+                 "action": "[PLACEHOLDER: what you do.]",
+                 "result": "[PLACEHOLDER: what you find.]"},
+            ],
+        },
+        "Body": {
+            "overview": None,
+            "parts": [
+                {"label": "Torso",
+                 "action": "[PLACEHOLDER: what you do.]",
+                 "result": "[PLACEHOLDER: what you find.]"},
+                {"label": "Back",
+                 "action": "[PLACEHOLDER: what you do.]",
+                 "result": "[PLACEHOLDER: what you find.]"},
+            ],
+        },
+        # Add more regions here by copying one of the blocks above.
+    },
+
+    "diagnosis": {
+        "prompt": "What do you believe the diagnosis is?",
+        "options": [
+            {"name": "[PLACEHOLDER: wrong diagnosis A]",
+             "description": "[PLACEHOLDER: dictionary description for diagnosis A.]",
+             "correct": False,
+             "response": [(None, "[PLACEHOLDER: why this diagnosis doesn't fit.]")]},
+            {"name": "[PLACEHOLDER: correct diagnosis]",
+             "description": "[PLACEHOLDER: dictionary description for the correct diagnosis.]",
+             "correct": True,
+             "response": [
+                 (None, "[PLACEHOLDER: what the doctor decides.]"),
+                 (None, "[PLACEHOLDER: the treatment the doctor prescribes.]"),
+             ]},
+            {"name": "[PLACEHOLDER: wrong diagnosis C]",
+             "description": "[PLACEHOLDER: dictionary description for diagnosis C.]",
+             "correct": False,
+             "response": [(None, "[PLACEHOLDER: why this diagnosis doesn't fit.]")]},
+        ],
+    },
+}
+
+
+# ---------------------------------------------------------------------
+# THE CASE LIST: add every case here. They appear in this order.
+# ---------------------------------------------------------------------
+ALL_CASES = [CASE_ERYKAH, CASE_PLACEHOLDER]
+
+
+# =====================================================================
+# HEALTHY VITALS BASELINES - shared by every case. Do not edit per case.
+#
+# Approximate teaching ranges for awake, resting patients. Verify against
+# your course reference (e.g. PALS, Harriet Lane, AHA).
+# A patient falls in a group if min_age <= age_years < max_age.
+# =====================================================================
+
+BASELINES = [
+    {"group": "Infant (under 1 year)",    "min_age": 0,  "max_age": 1,   "bp": "72-104 / 37-56 mmHg",  "hr": "100-160 bpm", "rr": "30-53 breaths/min", "glucose": "60-100 mg/dL (fasting)"},
+    {"group": "Toddler (1-2 years)",      "min_age": 1,  "max_age": 3,   "bp": "86-106 / 42-63 mmHg",  "hr": "98-140 bpm",  "rr": "22-37 breaths/min", "glucose": "70-100 mg/dL (fasting)"},
+    {"group": "Preschool (3-5 years)",    "min_age": 3,  "max_age": 6,   "bp": "89-112 / 46-72 mmHg",  "hr": "80-120 bpm",  "rr": "20-28 breaths/min", "glucose": "70-100 mg/dL (fasting)"},
+    {"group": "School-age (6-12 years)",  "min_age": 6,  "max_age": 13,  "bp": "97-115 / 57-76 mmHg",  "hr": "70-120 bpm",  "rr": "18-25 breaths/min", "glucose": "70-100 mg/dL (fasting)"},
+    {"group": "Adolescent (13-17 years)", "min_age": 13, "max_age": 18,  "bp": "110-131 / 64-83 mmHg", "hr": "60-100 bpm",  "rr": "12-20 breaths/min", "glucose": "70-100 mg/dL (fasting)"},
+    {"group": "Adult (18+ years)",        "min_age": 18, "max_age": 150, "bp": "under 120 / under 80 mmHg", "hr": "60-100 bpm", "rr": "12-20 breaths/min", "glucose": "70-99 mg/dL (fasting)"},
+]
+
+
+# =====================================================================
+# ENGINE - works for any case. You should not need to edit below here.
+# =====================================================================
+
+def say(case, speaker, line):
+    """Print one line of dialogue or narration."""
+    text = line.format(doctor=doctor, complaint=case["chief_complaint"])
+    if speaker:
+        print(f"\n{speaker}: {text}")
+    else:
+        print(f"\n{text}")
+
+
+def pick(title, labels, back_label):
+    """Show a numbered menu. Returns the chosen index, or None if the player chose to go back."""
+    while True:
+        print(f"\n{title}")
+        for number, label in enumerate(labels, start=1):
+            print(f"{number}. {label}")
+        print(f"0. {back_label}")
+        choice = input("Enter a number: ").strip()
+        if choice == "0":
+            return None
+        if choice.isdigit() and 1 <= int(choice) <= len(labels):
+            return int(choice) - 1
+        print("\nInvalid input")
+
+
+def check_case(case):
+    """Catch common template mistakes before the game starts."""
+    options = case["diagnosis"]["options"]
+    correct_count = sum(1 for option in options if option["correct"])
+    if correct_count != 1:
+        raise ValueError(f"Case '{case['title']}': the diagnosis list needs exactly ONE option with correct=True (found {correct_count}).")
+    if not isinstance(case["age_years"], (int, float)):
+        raise ValueError(f"Case '{case['title']}': age_years must be a number, like 12 or 0.5.")
+
+
+def vitals_menu(case):
+    items = case["vitals"]
+    while True:
+        index = pick("Which vital would you like to assess?",
+                     [v["label"] for v in items], "Return to Beginning")
+        if index is None:
+            return
+        say(case, None, items[index]["action"])
+        say(case, None, items[index]["result"])
+
+
+def history_menu(case):
+    items = case["history"]
+    while True:
+        index = pick("What would you like to ask about?",
+                     [h["label"] for h in items],
+                     "You're done asking about medical history for now")
+        if index is None:
+            return
+        say(case, None, items[index]["action"])
+        for speaker, line in items[index]["responses"]:
+            say(case, speaker, line)
+
+
+def exam_menu(case):
+    regions = case["exam"]
+    names = list(regions.keys())
+    while True:
+        index = pick("Where would you like to examine first?", names,
+                     "You have concluded your physical examination")
+        if index is None:
+            return
+        region = regions[names[index]]
+        if region["overview"]:
+            say(case, None, region["overview"])
+        parts = region["parts"]
+        while True:
+            part_index = pick(f"What would you like to observe? ({names[index]})",
+                              [p["label"] for p in parts],
+                              "Examine something else for now")
+            if part_index is None:
+                break
+            say(case, None, parts[part_index]["action"])
+            say(case, None, parts[part_index]["result"])
+
+
+def diagnosis_lookup_menu(case):
+    """Dictionary section: look up the possible diagnoses, alphabetically."""
+    entries = sorted(case["diagnosis"]["options"], key=lambda option: option["name"].lower())
+    while True:
+        index = pick("Which diagnosis would you like to look up?",
+                     [entry["name"] for entry in entries], "Back to the dictionary")
+        if index is None:
+            return
+        say(case, None, f"{entries[index]['name']}: {entries[index]['description']}")
+
+
+def baseline_for_age(age):
+    for group in BASELINES:
+        if group["min_age"] <= age < group["max_age"]:
+            return group
+    return None
+
+
+def baseline_menu(case):
+    """Dictionary section: healthy vitals for pediatric and adult patients."""
+    patient_group = baseline_for_age(case["age_years"])
+    labels = []
+    for group in BASELINES:
+        marker = "  <- your patient's age group" if group is patient_group else ""
+        labels.append(group["group"] + marker)
+    while True:
+        index = pick("Healthy vitals reference. Which age group?", labels, "Back to the dictionary")
+        if index is None:
+            return
+        group = BASELINES[index]
+        print(f"\nHealthy vitals: {group['group']}")
+        print(f"  Blood pressure: {group['bp']}")
+        print(f"  Heart rate:     {group['hr']}")
+        print(f"  Respiration:    {group['rr']}")
+        print(f"  Glucose:        {group['glucose']}")
+
+
+def dictionary_menu(case):
+    """Medical Dictionary: diagnoses and the healthy vitals reference."""
+    print("\nWelcome to the Medical Dictionary!")
+    while True:
+        index = pick("What would you like to look up?",
+                     ["Diagnoses", "Healthy vitals reference"], "Return to the exam")
+        if index is None:
+            return
+        [diagnosis_lookup_menu, baseline_menu][index](case)
+
+
+def diagnosis_menu(case):
+    """Returns the diagnosis option the player submitted, or None if they went back to the exam."""
+    diagnosis = case["diagnosis"]
+    options = diagnosis["options"]
+    while True:
+        index = pick(diagnosis["prompt"], [o["name"] for o in options],
+                     "Go back and gather more information")
+        if index is None:
+            return None
+        option = options[index]
+        confirm = pick(f"Submit '{option['name']}' as your final diagnosis? You can't change it.",
+                       ["Yes, submit this diagnosis"], "No, let me choose again")
+        if confirm is None:
+            continue
+        for speaker, line in option["response"]:
+            say(case, speaker, line)
+        return option
+
+
+def run_case(case):
+    """Play one case. Returns the diagnosis option the player submitted."""
+    for speaker, line in case["intro"]:
+        say(case, speaker, line)
+    while True:
+        index = pick("What do you want to do first?",
+                     ["Check Vitals",
+                      "Ask about past medical history",
+                      "Start a physical exam",
+                      "Check medical dictionary"],
+                     "Finish the exam and make a diagnosis")
+        if index is None:
+            chosen = diagnosis_menu(case)
+            if chosen is not None:
+                return chosen
+            continue
+        [vitals_menu, history_menu, exam_menu, dictionary_menu][index](case)
+
+
+def show_tally(results):
+    """results maps case number -> the diagnosis option the player submitted."""
+    right = sum(1 for option in results.values() if option["correct"])
+    wrong = len(results) - right
+    not_seen = len(ALL_CASES) - len(results)
+    print("\n" + "=" * 44)
+    print("END OF DAY SUMMARY")
+    print("=" * 44)
+    print(f"Correct diagnoses:   {right}")
+    print(f"Incorrect diagnoses: {wrong}")
+    if not_seen:
+        print(f"Patients not seen:   {not_seen}")
+    for number in sorted(results):
+        case = ALL_CASES[number]
+        option = results[number]
+        verdict = "Correct" if option["correct"] else "Incorrect"
+        print(f"\nCase {number + 1} ({case['patient_name']}): you chose {option['name']} - {verdict}")
+        if not option["correct"]:
+            answer = next(o for o in case["diagnosis"]["options"] if o["correct"])
+            print(f"  Correct diagnosis: {answer['name']}")
+
+
+def main():
+    for case in ALL_CASES:
+        check_case(case)
+    results = {}
+    while True:
+        if len(results) == len(ALL_CASES):
+            print("\nYou've seen all of today's patients.")
+            break
+        labels = []
+        for number, case in enumerate(ALL_CASES):
+            suffix = " (diagnosed)" if number in results else ""
+            labels.append(f"Case {number + 1}: {case['title']}{suffix}")
+        index = pick("Which patient would you like to see?", labels, "Leave the clinic and see your results")
+        if index is None:
+            break
+        if index in results:
+            print("\nYou've already made a final diagnosis for this patient.")
+            continue
+        results[index] = run_case(ALL_CASES[index])
+    show_tally(results)
+
+
+doctor = input("What is your name, Doctor? ")
+main()
